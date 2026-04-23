@@ -2,7 +2,7 @@ import { google } from 'googleapis';
 import { Resend } from 'resend';
 
 const COLUMNS = [
-  'Timestamp',
+  'Data primirii',
   'Prenume',
   'Nume',
   'Email',
@@ -12,7 +12,7 @@ const COLUMNS = [
   'Acord T&C',
   'Pagina sursă',
   'IP',
-  'User-Agent',
+  'Browser',
 ];
 
 const FIELD_MAP = {
