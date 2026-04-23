@@ -2048,7 +2048,7 @@ textarea.w-input, textarea.w-select {
 
 @font-face {
   font-family: Clashdisplay;
-  src: url("https://cdn.prod.website-files.com/686690f51bf3080ee562f6b4/686690f51bf3080ee562f6cd_ClashDisplay-Medium.woff2") format("woff2");
+  src: url("../fonts/686690f51bf3080ee562f6cd_ClashDisplay-Medium.woff2") format("woff2");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -2056,7 +2056,7 @@ textarea.w-input, textarea.w-select {
 
 @font-face {
   font-family: Clashdisplay;
-  src: url("https://cdn.prod.website-files.com/686690f51bf3080ee562f6b4/686690f51bf3080ee562f6ce_ClashDisplay-Semibold.woff2") format("woff2");
+  src: url("../fonts/686690f51bf3080ee562f6ce_ClashDisplay-Semibold.woff2") format("woff2");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -3435,7 +3435,7 @@ blockquote {
 .footer-checkbox.w--redirected-checked {
   border-color: var(--color-neutral--white);
   background-color: var(--color-neutral--transparent);
-  background-image: url("https://cdn.prod.website-files.com/686690f51bf3080ee562f6b4/686690f51bf3080ee562f6c0_Vector.svg");
+  background-image: url("../../images/686690f51bf3080ee562f6c0_Vector.svg");
   background-position: 50%;
   background-size: auto;
 }
