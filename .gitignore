@@ -1,0 +1,16 @@
+# Claude/tooling
+.claude/
+.memsearch/
+.vercel/
+
+# Raw scraped HTML (source material, not for production)
+*_fresh_raw.html
+*_clean_raw.html
+rebuild_*.py
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Node
+node_modules/
