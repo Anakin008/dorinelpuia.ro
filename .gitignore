@@ -14,3 +14,11 @@ Thumbs.db
 
 # Node
 node_modules/
+package-lock.json
+
+.vercel
+
+# Secrets — never commit
+.env
+.env.local
+.env.*.local
