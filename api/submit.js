@@ -148,17 +148,22 @@ function buildEmailText({ data, timestamp, sourcePage }) {
   ].join('\n');
 }
 
+function parseAddrList(s) {
+  return (s || '')
+    .split(',')
+    .map((a) => a.trim().replace(/^["']|["']$/g, '').trim())
+    .filter(Boolean);
+}
+
 async function sendEmail({ data, timestamp, sourcePage }) {
   const apiKey = process.env.RESEND_API_KEY;
-  const from = process.env.EMAIL_FROM;
-  const to = (process.env.EMAIL_TO || '')
-    .split(',')
-    .map((s) => s.trim())
-    .filter(Boolean);
+  const from = (process.env.EMAIL_FROM || '').trim().replace(/^["']|["']$/g, '');
+  const to = parseAddrList(process.env.EMAIL_TO);
+  const bcc = parseAddrList(process.env.EMAIL_TO_BCC);
   if (!apiKey || !from || to.length === 0) {
     return { skipped: true, reason: 'Resend vars missing (RESEND_API_KEY / EMAIL_FROM / EMAIL_TO)' };
   }
-  const replyToFromEnv = (process.env.EMAIL_REPLY_TO || '').trim();
+  const replyToFromEnv = (process.env.EMAIL_REPLY_TO || '').trim().replace(/^["']|["']$/g, '');
   const replyTo = replyToFromEnv || data['email-address'];
 
   const resend = new Resend(apiKey);
@@ -166,7 +171,7 @@ async function sendEmail({ data, timestamp, sourcePage }) {
   const html = buildEmailHtml({ data, timestamp, sourcePage });
   const text = buildEmailText({ data, timestamp, sourcePage });
 
-  const res = await resend.emails.send({
+  const payload = {
     from,
     to,
     replyTo,
@@ -177,8 +182,11 @@ async function sendEmail({ data, timestamp, sourcePage }) {
       'X-Entity-Ref-ID': `dpr-${Date.now()}`,
       'X-Source': 'dorinelpuia.ro',
     },
-  });
-  return { skipped: false, id: res?.data?.id };
+  };
+  if (bcc.length) payload.bcc = bcc;
+
+  const res = await resend.emails.send(payload);
+  return { skipped: false, id: res?.data?.id, recipients: { to: to.length, bcc: bcc.length } };
 }
 
 export default async function handler(req, res) {
